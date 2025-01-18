@@ -25,8 +25,7 @@
                 <!-- The post content goes inside the card-text. -->
                 <!-- Use the | safe filter inside the template tags -->
                 <p class="card-text">
-                    {{ post.content | safe }}
-                </p>
+                    {{ post.content | safe }}</p>
             </div>
         </div>
     </div>
@@ -53,7 +52,7 @@
           {% if not comment.approved and comment.author == user %}
           faded{% elif not comment.approved %} d-none{% endif %}">
           <p class="font-weight-bold">
-            <b>{{ comment.author }}</b><br>
+            {{ comment.author }}
             <span class="font-weight-normal">
               {{ comment.created_on }}
             </span> wrote:

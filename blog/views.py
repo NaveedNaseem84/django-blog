@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import render
 from django.views import generic
+from django.contrib import messages
 from .models import Post
 from .forms import CommentForm
-from django.contrib import messages
+
 
 # Create your views here.
 class PostList(generic.ListView):
@@ -32,6 +33,7 @@ def post_detail(request, slug):
     post = get_object_or_404(queryset, slug=slug)
     comments = post.comments.all().order_by("-created_on")
     comment_count = post.comments.filter(approved=True).count()
+    comment_form = CommentForm()
 
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST)
@@ -56,5 +58,6 @@ def post_detail(request, slug):
             "comments": comments,
             "comment_count": comment_count,
             "comment_form": comment_form,
+            
         },
     )
